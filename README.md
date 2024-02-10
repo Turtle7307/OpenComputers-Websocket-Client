@@ -18,7 +18,7 @@ OpenComputers-Websocket-Client is a WebSocket client for OpenComputers that has 
 
 1. download library by typing in a OpenComputers Computer:
     ```bash
-    wget https://raw.githubusercontent.com/Turtle7307/OpenComputers-Websocket-Client/main/WebSocket.lua /usr/lib/websocket.lua
+    wget https://raw.githubusercontent.com/Turtle7307/OpenComputers-Websocket-Client/main/websocket.lua websocket.lua
     ```
 2. Import library into your script:
     ```lua
