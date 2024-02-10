@@ -562,18 +562,18 @@ local readMessages = function(socket)
                         if opcode == Opcodes.TEXT or opcode == Opcodes.BINARY then
                             event.push("socketMessage", socket.name, message, opcode)
                         elseif opcode == Opcodes.CLOSE then
-                            if socket..state ~= "CLOSING" then
+                            if socket.state ~= "CLOSING" then
                                 socket.state = "CLOSING"
                                 local code, reason = decode_frame_close(message)
                                 local encoded = encode_frame_close(code)
                                 encoded = encode_frame(encoded, Opcodes.CLOSE, true)
                                 socket.tcpSocket.write(encoded)
                                 stop = true
-                                close(true, code or 1005, reason)
-                                event.push("InternalWebsocketCloseFinished")
+                                close(socket, true, code or 1005, reason)
                             else
                                 stop = true
-                                close(true, 1005, "")
+                                close(socket, true, 1005, "")
+                                event.push("InternalWebsocketCloseFinished")
                             end
                         end
                     end
